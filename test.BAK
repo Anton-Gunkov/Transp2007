@@ -1,0 +1,9 @@
+CLEAR
+
+m.cSeekDir = 'D:\WSMR2007\wsmrdat\DAT\'
+m.cLenght_st = LEN('asd')+2
+m.cLenght = LEN(ALLTRIM('106\00000905.SMR                  '))-4
+m.c_4 = SUBSTR(ALLTRIM('106\00000905.SMR                  '), cLenght_st, cLenght)
+
+? m.cSeekDir+ALLTRIM('106\00000905.SMR                  ')+' TO '+'DWork\'+m.c_4+'.dbf.zip'
+

@@ -1,0 +1,16 @@
+Form c:\transp2007\forms\rabot.scx has the following errors:
+    Program DEFOX_PROC - Undefined
+    Unknown CHECKREGISTERED - Undefined
+
+Program c:\transp2007\progs\defox.prg has the following errors:
+    Program DEFOX_PROC - Undefined
+    Unknown CHECKREGISTERED - Undefined
+    Unknown SETREGISTRYINFO - Undefined
+    Unknown GETREGISTRYINFO - Undefined
+
+Form c:\transp2007\forms\rega.scx has the following errors:
+    Program DEFOX_PROC - Undefined
+    Unknown CHECKREGISTERED - Undefined
+    Unknown GETREGISTRYINFO - Undefined
+    Unknown ENTERREGISTRATIONKEY - Undefined
+

@@ -1,0 +1,68 @@
+set procedure to defox_proc
+
+set talk off
+set deleted on
+set date to german
+set century on
+set safety off
+local m.lnErr, m.lnErr1, m.lnOtv, m.lcTxt, m.lcRegKey, m.ldExpDate
+
+m.lcRegKey=""
+m.lnErr=CheckRegistered(@m.lcRegKey)
+
+if m.lnErr=0 or between(m.lnErr, 1000, 9999)
+	
+	_screen.Caption = 'Transport2007 тестовая v1.2 для СУ-257 Светлогорск'
+	return
+	
+else
+	IF between(m.lnErr,20,39)
+		m.lnOtv=messagebox("Невозможно прочитать информацию о программе из реестра."+chr(13)+ ;
+			               "Причины: программа запущена первый раз или"+chr(13)+ ;
+			               "информация о программе в реестре повреждена."+chr(13)+chr(13)+ ;
+			               "'ДА'  -  записать/переписать информацию о программе в реестр"+chr(13)+ ;
+			               "           (необходимо для дальнейшей регистрации)"+chr(13)+chr(13)+ ;
+			               "'НЕТ' - продолжить знакомство с программой."+chr(13)+chr(13)+ ;
+			               "                                   Ваш выбор?", ;
+			               36, "Предупреждение")
+		if m.lnOtv=7
+			_screen.Caption = 'Transport2007 Неполноценная v1.2 '
+			return
+		endif
+		
+		m.lnErr1=SetRegistryInfo(date()+15)
+		if m.lnErr1>0
+			messagebox("Не удаётся записать информацию о программе в реестр."+chr(13)+ ;
+			           "Ошибка № "+allt(str(m.lnErr1))+chr(13)+ ;
+			           "Программа не осилила :(", 16, "Ошибка:")
+			_screen.Caption = 'Transport2007 Неполноценная v1.2 '
+			return
+		endif
+
+		m.lnErr1=GetRegistryInfo(@m.lcTxt)
+		if m.lnErr1>0
+			messagebox("Не удаётся прочесть информацию о программе в реестре."+chr(13)+ ;
+				       "Программа не осилила :(", 16, "Ошибка:")
+			_screen.Caption = 'Transport2007 Неполноценная v1.1 '
+			return
+		endif
+
+	ENDIF
+	
+	*---------------------------Пробуем еще раз проверить
+	m.lcRegKey=""
+    m.lnErr=CheckRegistered(@m.lcRegKey)
+	
+	DO CASE 
+	   CASE m.lnErr=0 or between(m.lnErr, 1000, 9999)
+	        _screen.Caption = 'Transport2007 тестовая v1.2 для СУ-257 Светлогорск'
+	   OTHERWISE 
+	        _screen.Caption = 'Transport2007 v1.2 DEMO-версия'
+	ENDCASE 
+	
+	return
+     	  	
+endif
+
+release procedure defox_proc
+
